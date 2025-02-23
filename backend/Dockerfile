@@ -8,5 +8,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# FastAPI 애플리케이션 코드 복사
+# ✅ `app` 폴더 내부의 코드를 컨테이너 내부로 복사
+COPY ./app /app 
+
 # FastAPI 실행
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
