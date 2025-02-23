@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build: ./frontend
+    container_name: vue-frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8000:8000"
+    command: npm run serve
+
+  backend:
+    build: ./backend
+    container_name: fastapi-backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
