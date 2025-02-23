@@ -46,6 +46,7 @@ cd my-project
 ---
 
 ## 🚀 **개발 환경 (Development)**
+- 위의 구조대로 만들어 놓고 vue의 경우 frontend 폴더에 들어가서 vue create . 으로 프로젝트를 만들고 수행해야함.
 - Vue는 `npm run serve`로 실행 (`8080` 포트)
 - FastAPI는 `uvicorn`으로 실행 (`8000` 포트)
 - NginX가 80번 포트에서 Reverse Proxy 역할 수행
