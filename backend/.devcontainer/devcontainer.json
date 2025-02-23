@@ -1,0 +1,14 @@
+{
+    "name": "FastAPI Dev Container",
+    // 개발, 배포 분리
+    "dockerComposeFile": "../../docker-compose.dev.yml",  
+    // "dockerComposeFile": "../../docker-compose.prod.yml",
+    "service": "backend",
+    "workspaceFolder": "/app",
+    "extensions": [
+        "ms-python.python",
+    ],
+    "forwardPorts": [
+        8080
+    ]
+}

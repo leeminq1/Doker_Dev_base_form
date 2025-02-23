@@ -1,0 +1,14 @@
+{
+    "name": "Vue Dev Container",
+    "dockerComposeFile": "../../docker-compose.dev.yml",
+    // "dockerComposeFile": "../../docker-compose.prod.yml",
+    "service": "frontend",
+    "workspaceFolder": "/app",
+    "extensions": [
+        "vue.volar",
+        "esbenp.prettier-vscode"
+    ],
+    "forwardPorts": [
+        8000
+    ]
+}
