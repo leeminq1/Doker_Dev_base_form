@@ -14,7 +14,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    container_name: vue-frontend-dev
+    container_name: vue-frontend-dev   #### container_name이 nginx에서 연결할 upstream에서의 이름
     volumes:
       - ./frontend:/app
     ports:
