@@ -11,6 +11,9 @@ RUN npm install
 # 소스 코드 복사
 COPY . .
 
+# Vue CLI를 전역 설치 (필요한 경우)
+RUN npm install -g @vue/cli
+
 # Vue 빌드 실행 (dist 폴더 생성)
 RUN npm run build
 
