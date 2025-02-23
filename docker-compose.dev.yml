@@ -7,19 +7,24 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - frontend
-      - backend
+      frontend:
+        condition: service_started
+      backend:
+        condition: service_started
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    container_name: vue-frontend-dev   #### container_name이 nginx에서 연결할 upstream에서의 이름
-    volumes:
-      - ./frontend:/app
+    container_name: vue-frontend-dev # container_name이 nginx에서 연결할 upstream에서의 이름
     ports:
       - "8000:8000"
-    command: npm run serve
+    volumes:
+      - ./frontend:/app # ✅ 로컬 소스를 컨테이너 `/app`에 매핑
+      - /app/node_modules # ✅ node_modules는 제외하여 충돌 방지
+    env_file:
+      - ./frontend/.env.development # ✅ .env 파일을 로드
+    command: [ "npm", "run", "serve" ]
 
   backend:
     build:
@@ -30,6 +35,8 @@ services:
       - ./backend:/app
     ports:
       - "8080:8080"
+    command: [ "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload" ]
+
   mongodb:
     image: mongo:6
     container_name: mongodb
