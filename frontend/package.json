@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "start": "serve -s dist -l 8000"
+    }
+}

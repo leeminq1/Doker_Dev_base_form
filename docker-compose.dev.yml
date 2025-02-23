@@ -11,8 +11,10 @@ services:
       - backend
 
   frontend:
-    build: ./frontend
-    container_name: vue-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: vue-frontend-dev
     volumes:
       - ./frontend:/app
     ports:
@@ -20,15 +22,14 @@ services:
     command: npm run serve
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend # ✅ backend 폴더를 컨텍스트로 설정
+      dockerfile: Dockerfile # ✅ backend 폴더 내 Dockerfile을 사용
     container_name: fastapi-backend
     volumes:
       - ./backend:/app
     ports:
       - "8080:8080"
-    depends_on:
-      - mongodb
-
   mongodb:
     image: mongo:6
     container_name: mongodb
